@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Sean Kung - posts</title><link href="https://seankung.com/" rel="alternate"></link><link href="https://seankung.com/feeds/posts.atom.xml" rel="self"></link><id>https://seankung.com/</id><updated>2020-06-11T00:00:00-04:00</updated><entry><title>Tic-Tac-Toe Writeup</title><link href="https://seankung.com/articles/2020/06/11/password-checker-wripteup/" rel="alternate"></link><published>2020-06-11T00:00:00-04:00</published><updated>2020-06-11T00:00:00-04:00</updated><author><name>Sean Kung</name></author><id>tag:seankung.com,2020-06-11:/articles/2020/06/11/password-checker-wripteup/</id><summary type="html">&lt;p&gt;The code sample is found &lt;a href="https://github.com/seakun/Python-Projects/blob/master/checkpassword.py"&gt;here&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Sean Kung - posts</title><link href="https://seankung.com/" rel="alternate"></link><link href="https://seankung.com/feeds/posts.atom.xml" rel="self"></link><id>https://seankung.com/</id><updated>2020-06-28T00:00:00-04:00</updated><entry><title>Scraping Lobsters Writeup</title><link href="https://seankung.com/articles/2020/06/28/scraping-lobsters-wripteup/" rel="alternate"></link><published>2020-06-28T00:00:00-04:00</published><updated>2020-06-28T00:00:00-04:00</updated><author><name>Sean Kung</name></author><id>tag:seankung.com,2020-06-28:/articles/2020/06/28/scraping-lobsters-wripteup/</id><summary type="html">&lt;p&gt;The code sample is found &lt;a href="https://github.com/seakun/Python-Projects/blob/master/scrape.py"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Modules used: bs4 from BeautifulSoup, requests, and pprint.&lt;/p&gt;
+&lt;p&gt;I created this program to scrape the popular tech website &lt;a href="https://lobste.rs/"&gt;Lobsters&lt;/a&gt;. It'll get the links, titles, and scores of each story and output to a dictionary the ones that have more than 10 upvotes. To run …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The code sample is found &lt;a href="https://github.com/seakun/Python-Projects/blob/master/scrape.py"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Modules used: bs4 from BeautifulSoup, requests, and pprint.&lt;/p&gt;
+&lt;p&gt;I created this program to scrape the popular tech website &lt;a href="https://lobste.rs/"&gt;Lobsters&lt;/a&gt;. It'll get the links, titles, and scores of each story and output to a dictionary the ones that have more than 10 upvotes. To run this run this program, type in:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;scrape&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There are 2 main parts - the global variables and the create_custom_lb_list():&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://lobste.rs/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;soup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lobster_links&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.u-url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lobster_subtext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.story&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;create_custom_lb_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;links&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subtext&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The "res" variable gets the webpage.
+"soup" breaksdown the "res" variable into HTML
+"lobster_links" searches the tags in "soup" for the CSS classes 'u-url'.
+"lobster_subtext" searches the tags in "soup" for the CSS classes 'story'.&lt;/p&gt;
+&lt;p&gt;In "create_custom_lb_list", we take the link and subtext parameter to create the list. I use "enumerate" function since I need to iterate through the links and also count upwards. I extract the title, link, and score from "lobster_links" and "lobster_subtext". If the score if over 10, I'll add them to the list as a dictionary.&lt;/p&gt;
+&lt;p&gt;The remaining parts "sort_stories_by_score" and "pprint" sorts the list by ascending score and outputs the dictionary in a readable format, respectively.&lt;/p&gt;</content><category term="posts"></category><category term="python"></category></entry><entry><title>Password Checker Writeup</title><link href="https://seankung.com/articles/2020/06/11/password-checker-wripteup/" rel="alternate"></link><published>2020-06-11T00:00:00-04:00</published><updated>2020-06-11T00:00:00-04:00</updated><author><name>Sean Kung</name></author><id>tag:seankung.com,2020-06-11:/articles/2020/06/11/password-checker-wripteup/</id><summary type="html">&lt;p&gt;The code sample is found &lt;a href="https://github.com/seakun/Python-Projects/blob/master/checkpassword.py"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Modules used: requests, hashlib, and sys.&lt;/p&gt;
 &lt;p&gt;We use this program to check if the given password was cracked.
 To do that we use the command line and type in the program name with as many passwords as we want to check:&lt;/p&gt;
@@ -12,9 +36,9 @@ To do that we use the command line and type in the program name with as many pas
 
 
 &lt;p&gt;In the main method, it iterates through the arguments. In this case, checkpassword will loop through "password123", "abc123", and "test123".&lt;/p&gt;
-&lt;p&gt;The method calls pwned_api_check(password) to:
-⋅⋅&lt;em&gt; Hash the password using hashlib.
-⋅⋅&lt;/em&gt; Split the hashed password into the first 5 and last 5 characters.&lt;/p&gt;
+&lt;p&gt;The method calls pwned_api_check(password) to:&lt;/p&gt;
+&lt;p&gt;⋅Hash the password using hashlib.&lt;/p&gt;
+&lt;p&gt;⋅Split the hashed password into the first 5 and last 5 characters.&lt;/p&gt;
 &lt;p&gt;We split the hashed password because it would be insecure to send the entire password over the internet anyway.&lt;/p&gt;
 &lt;p&gt;The database we're querying is on haveibeenpwned.com. We'll send a request and we'll get the list of all hashes that have that first 5 characters hashed.&lt;/p&gt;
 &lt;p&gt;It's in the get_password_leaks_count() method where we match the hashes and count the number of times that hash has shown up. &lt;/p&gt;
